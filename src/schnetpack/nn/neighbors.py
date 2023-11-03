@@ -60,6 +60,12 @@ def atom_distances(
         offsets = offsets.view(B, A, N, D)
         dist_vec += offsets
 
+    if neighbor_mask is not None:
+        # avoid zero values in distances when all atoms don't have the same number of neighbors.
+        tmp_dist_vec = torch.ones_like(dist_vec)
+        tmp_dist_vec[neighbor_mask != 0] = dist_vec[neighbor_mask != 0]
+        dist_vec = tmp_dist_vec
+
     # Compute vector lengths
     distances = torch.norm(dist_vec, 2, 3)
 
