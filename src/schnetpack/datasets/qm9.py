@@ -194,7 +194,7 @@ class QM9(DownloadableAtomsData):
         all_atoms = []
         all_properties = []
 
-        irange = np.arange(len(ordered_files), dtype=np.int)
+        irange = np.arange(len(ordered_files), dtype=int)
         if evilmols is not None:
             irange = np.setdiff1d(irange, evilmols - 1)
 

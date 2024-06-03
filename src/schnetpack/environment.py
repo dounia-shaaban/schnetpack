@@ -58,7 +58,7 @@ class SimpleEnvironmentProvider(BaseEnvironmentProvider):
             )
 
             neighborhood_idx = neighborhood_idx[
-                ~np.eye(n_atoms, dtype=np.bool)
+                ~np.eye(n_atoms, dtype=bool)
             ].reshape(n_atoms, n_atoms - 1)
 
             if grid is not None:
@@ -100,10 +100,10 @@ class AseEnvironmentProvider(BaseEnvironmentProvider):
 
             n_nbh = np.tile(n_nbh[:, np.newaxis], (1, n_max_nbh))
             nbh_range = np.tile(
-                np.arange(n_max_nbh, dtype=np.int)[np.newaxis], (n_nbh.shape[0], 1)
+                np.arange(n_max_nbh, dtype=int)[np.newaxis], (n_nbh.shape[0], 1)
             )
 
-            mask = np.zeros((n_atoms, np.max(n_max_nbh)), dtype=np.bool)
+            mask = np.zeros((n_atoms, np.max(n_max_nbh)), dtype=bool)
             mask[uidx, :] = nbh_range < n_nbh
             neighborhood_idx = -np.ones((n_atoms, np.max(n_max_nbh)), dtype=np.float32)
             neighborhood_idx[mask] = idx_j
@@ -169,10 +169,10 @@ class TorchEnvironmentProvider(BaseEnvironmentProvider):
 
             n_nbh = np.tile(n_nbh[:, np.newaxis], (1, n_max_nbh))
             nbh_range = np.tile(
-                np.arange(n_max_nbh, dtype=np.int)[np.newaxis], (n_nbh.shape[0], 1)
+                np.arange(n_max_nbh, dtype=int)[np.newaxis], (n_nbh.shape[0], 1)
             )
 
-            mask = np.zeros((n_atoms, np.max(n_max_nbh)), dtype=np.bool)
+            mask = np.zeros((n_atoms, np.max(n_max_nbh)), dtype=bool)
             mask[uidx, :] = nbh_range < n_nbh
             neighborhood_idx = -np.ones((n_atoms, np.max(n_max_nbh)), dtype=np.float32)
             offset = np.zeros((n_atoms, np.max(n_max_nbh), 3), dtype=np.float32)

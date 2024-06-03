@@ -26,14 +26,14 @@ def _collate_aseatoms(examples):
 
     # initialize maximum sizes
     max_size = {
-        prop: np.array(val.size(), dtype=np.int) for prop, val in properties.items()
+        prop: np.array(val.size(), dtype=int) for prop, val in properties.items()
     }
 
     # get maximum sizes
     for properties in examples[1:]:
         for prop, val in properties.items():
             max_size[prop] = np.maximum(
-                max_size[prop], np.array(val.size(), dtype=np.int)
+                max_size[prop], np.array(val.size(), dtype=int)
             )
 
     # initialize batch
